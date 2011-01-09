@@ -94,70 +94,68 @@ var plurkEasyEmoticon = {
 
         easyDiv: document.getElementById('plurkEasyEmoticonDiv'),
         isBarVisible: false,
-        barWidth: 96,
+        barHeight: 96,
         lastInputFocused: null,
         updaterZIndex: document.getElementById('updater').style.zIndex,
 
         init: function() {
-            if (!this.easyDiv) {
-                this.easyDiv = document.createElement('div');
-                this.easyDiv.setAttribute('id', 'extraEmoticonBar');
-                //this.easyDiv.setAttribute('style', 'z-index:9999; width:100%; height:' + this.barHeight + 'px; position: fixed; top:0; background-color:#fff;')
-                this.easyDiv.setAttribute('style', 'z-index:9999; overflow-y:scroll; width:' + this.barWidth + 'px; height:100%; position: fixed; top:0; background-color:#fff;')
-                var allSets = [this.basicSet, this.extraSet, this.hiddenSet];
-                for (var s in allSets) {
-                    //var container = document.createElement('div');
-                    var currSet = allSets[s];
-                    for (var i in currSet) {
-                        var eicon = currSet[i];
-                        var img = document.createElement('img');
-                        img.setAttribute('alt', eicon.codeText);
-                        img.setAttribute('src', eicon.imgUrl);
-                        img.addEventListener('click', function(event) {
-                            if (plurkEasyEmoticon.lastInputFocused) {
-                                var text = plurkEasyEmoticon.lastInputFocused.value;
-                                if (text.length > 0) {
-                                    text += ' ';
-                                }
-                                plurkEasyEmoticon.lastInputFocused.value = text + event.target.getAttribute('alt');
-                                plurkEasyEmoticon.lastInputFocused.focus();
-                                var pos = plurkEasyEmoticon.lastInputFocused.value.length;
-                                plurkEasyEmoticon.lastInputFocused.setSelectionRange(pos, pos);
-                            } else {
-                                alert('please after installing PlurkEasyEmoticon move input on plurk editbox');
-                            }
-                        }, true);
-                        //container.appendChild(img);
-                        this.easyDiv.appendChild(img);
-                    }
-                    //this.easyDiv.appendChild(container);
-                }
-                document.body.appendChild(this.easyDiv);
-                this.isBarVisible = true;
-                window.addEventListener('mousemove', function(event) {
-                    var x = event.clientX;
-                    
-                    if (plurkEasyEmoticon.isBarVisible) {
-                        if (x > plurkEasyEmoticon.barWidth) {
-                            plurkEasyEmoticon.easyDiv.style.display = 'none';
-                            document.getElementById('updater').style.zIndex = plurkEasyEmoticon.updaterZIndex;
-                            plurkEasyEmoticon.isBarVisible = false;
-                        }
-                    } else {
-                        if (x < plurkEasyEmoticon.barWidth) {
-                            plurkEasyEmoticon.easyDiv.style.display = 'block';
-                            document.getElementById('updater').style.zIndex = '10000';
-                            plurkEasyEmoticon.isBarVisible = true;
-                        }
-                    }
-                }, true);
-                document.getElementById('input_big').addEventListener('focus', function(event) {
-                    plurkEasyEmoticon.lastInputFocused = event.target;
-                }, true);
-                document.getElementById('input_small').addEventListener('focus', function(event) {
-                    plurkEasyEmoticon.lastInputFocused = event.target;
-                }, true);
+            if (this.easyDiv) {
+                return;
             }
+            this.easyDiv = document.createElement('div');
+            this.easyDiv.setAttribute('id', 'plurkEasyEmoticonDiv');
+            this.easyDiv.setAttribute('style', 'z-index:9999; width:100%; height:' + this.barHeight + 'px; position: fixed; bottom:0; background-color:#fff;')
+            //this.easyDiv.setAttribute('style', 'z-index:9999; width:100%; height:' + this.barHeight + 'px; position: fixed; top:0; background-color:#fff;')
+            //this.easyDiv.setAttribute('style', 'z-index:9999; overflow-y:scroll; width:' + this.barWidth + 'px; height:100%; position: fixed; top:0; right:0; background-color:#fff;')
+            var allSets = [this.basicSet, this.extraSet, this.hiddenSet];
+            for (var s in allSets) {
+                var currSet = allSets[s];
+                for (var i in currSet) {
+                    var eicon = currSet[i];
+                    var img = document.createElement('img');
+                    img.setAttribute('alt', eicon.codeText);
+                    img.setAttribute('src', eicon.imgUrl);
+                    img.addEventListener('click', function(event) {
+                        if (!plurkEasyEmoticon.lastInputFocused) {
+                            plurkEasyEmoticon.lastInputFocused = document.getElementById('input_big');
+                        }
+                        var text = plurkEasyEmoticon.lastInputFocused.value;
+                        if (text.length > 0) {
+                            text += ' ';
+                        }
+                        plurkEasyEmoticon.lastInputFocused.value = text + event.target.getAttribute('alt');
+                        plurkEasyEmoticon.lastInputFocused.focus();
+                        var pos = plurkEasyEmoticon.lastInputFocused.value.length;
+                        plurkEasyEmoticon.lastInputFocused.setSelectionRange(pos, pos);
+                    }, true);
+                    this.easyDiv.appendChild(img);
+                }
+            }
+            document.body.appendChild(this.easyDiv);
+            this.isBarVisible = true;
+            window.addEventListener('mousemove', function(event) {
+                var y = document.documentElement.clientHeight - event.clientY;
+                
+                if (plurkEasyEmoticon.isBarVisible) {
+                    if (y > plurkEasyEmoticon.barHeight) {
+                        plurkEasyEmoticon.easyDiv.style.display = 'none';
+                        //document.getElementById('updater').style.zIndex = plurkEasyEmoticon.updaterZIndex;
+                        plurkEasyEmoticon.isBarVisible = false;
+                    }
+                } else {
+                    if (y < plurkEasyEmoticon.barHeight) {
+                        plurkEasyEmoticon.easyDiv.style.display = 'block';
+                        //document.getElementById('updater').style.zIndex = '10000';
+                        plurkEasyEmoticon.isBarVisible = true;
+                    }
+                }
+            }, true);
+            document.getElementById('input_big').addEventListener('focus', function(event) {
+                plurkEasyEmoticon.lastInputFocused = event.target;
+            }, true);
+            document.getElementById('input_small').addEventListener('focus', function(event) {
+                plurkEasyEmoticon.lastInputFocused = event.target;
+            }, true);
         }
 };
-plurkEasyEmoticon.init();
+//plurkEasyEmoticon.init();
