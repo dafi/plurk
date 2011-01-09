@@ -104,7 +104,7 @@ var plurkEasyEmoticon = {
             }
             this.easyDiv = document.createElement('div');
             this.easyDiv.setAttribute('id', 'plurkEasyEmoticonDiv');
-            this.easyDiv.setAttribute('style', 'z-index:9999; width:100%; height:' + this.barHeight + 'px; position: fixed; bottom:0; background-color:#fff;')
+            this.easyDiv.setAttribute('style', 'z-index:9999; width:100%; position: fixed; bottom:0; background-color:#fff;')
             //this.easyDiv.setAttribute('style', 'z-index:9999; width:100%; height:' + this.barHeight + 'px; position: fixed; top:0; background-color:#fff;')
             //this.easyDiv.setAttribute('style', 'z-index:9999; overflow-y:scroll; width:' + this.barWidth + 'px; height:100%; position: fixed; top:0; right:0; background-color:#fff;')
             var allSets = [this.basicSet, this.extraSet, this.hiddenSet];
@@ -139,13 +139,13 @@ var plurkEasyEmoticon = {
                 if (plurkEasyEmoticon.isBarVisible) {
                     if (y > plurkEasyEmoticon.barHeight) {
                         plurkEasyEmoticon.easyDiv.style.display = 'none';
-                        //document.getElementById('updater').style.zIndex = plurkEasyEmoticon.updaterZIndex;
+                        document.getElementById('updater').style.zIndex = plurkEasyEmoticon.updaterZIndex;
                         plurkEasyEmoticon.isBarVisible = false;
                     }
                 } else {
                     if (y < plurkEasyEmoticon.barHeight) {
                         plurkEasyEmoticon.easyDiv.style.display = 'block';
-                        //document.getElementById('updater').style.zIndex = '10000';
+                        document.getElementById('updater').style.zIndex = '10000';
                         plurkEasyEmoticon.isBarVisible = true;
                     }
                 }
