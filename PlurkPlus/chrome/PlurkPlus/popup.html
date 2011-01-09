@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="js/common.js"></script>
+        <script src="js/plurk.js"></script>
+        <script src="js/popup.js"></script>
+        <link type="text/css" href="css/common.css" rel="stylesheet"/>
+        <link type="text/css" href="css/popup.css" rel="stylesheet"/>
+    </head>
+    <body onload="popup.init();">
+        <div id="status-container">
+            <ul>
+                <li id="status-text"></li>
+                <li id="goto-plurk" onclick="popup.openPlurk()"/"></li>
+                <li id="enable-count" onclick="popup.toggleCount();"></li>
+                <li id="mark-all-as-read" onclick="popup.markAllAsRead();"></li>
+            </ul>
+        </div>
+
+        <div id="login-container">
+            <a id="must-login" href="javascript:void(0)" onclick="popup.openOptions();"></a>
+        </div>
+    </body>
+</html>

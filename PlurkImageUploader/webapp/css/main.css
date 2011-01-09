@@ -1,0 +1,128 @@
+body, html {
+    background-color: #eee;
+    color: #000;
+    font-family: 'Helvetica Neue','Arial',sans-serif;
+    font-size: 12px;
+}
+
+.info {
+    font-size: 16px;
+    text-align: center;
+}
+
+a {
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+form.infobox {
+    background-color: #aaa;
+    border: 1px solid #aaa;
+    color: white;
+    display: block;
+    padding: 0.3em 0.3em 2.9em 0.2em;
+}
+
+form.infobox label {
+    font-weight: bold;
+    margin: 3px;
+}
+
+form.infobox .fields {
+    margin-bottom: 4px;
+}
+
+form.infobox #submit_search {
+    margin-left: 5px;
+}
+
+.credits {
+    font-size: 1.2em;
+    background-color: #aaa;
+    color: #F1F1F1;
+
+    position: absolute;
+    left: 3px;
+    bottom: 0px;
+    width: 80%;
+}
+
+.credits a {
+    text-decoration: none;
+}
+
+.credits a:hover {
+    text-decoration: underline;
+}
+
+.title {
+    background: #aaa;
+    color: #fff;
+    padding: 4px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.message-box {
+    font-size: 14px;
+}
+
+#plurk-list li {
+    list-style: none;
+    margin-bottom: 4px;
+    border-bottom: 1px dotted #DDDDDD;
+    padding-bottom: 4px;
+}
+
+ul {
+    margin-left: 0.8em;
+    padding-left: 0.8em;
+}
+
+.warning {
+    -moz-border-radius-bottomleft: 10px;
+    -moz-border-radius-bottomright: 10px;
+    -moz-border-radius-topleft: 10px;
+    -moz-border-radius-topright: 10px;
+
+    -webkit-border-bottom-left-radius: 10px;
+    -webkit-border-bottom-right-radius: 10px;
+    -webkit-border-top-left-radius: 10px;
+    -webkit-border-top-right-radius: 10px;
+
+    background-color: #aaa;
+    border: 2px solid #666;
+    color: #FFFFFF;
+    margin-top: 1.5em;
+    padding: 1em;
+}
+
+.buttons-panel {
+    margin-top: 10px;
+}
+
+.button {
+    background-color:#BB1D30;
+    border-color:#D75E5B #8B1C29 #8B1C29 #D75E5B;
+    border-style:solid;
+    border-width:1px;
+    color:#FFFFFF !important;
+    font-size:11px;
+    padding:6px;
+    text-decoration:none !important;
+}
+
+.submit-button {
+    background-color:#909090;
+    border-color:#b0b0b0 #707070 #707070 #b0b0b0;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.help {
+    font-size: 14px;
+}
+
+.help a {
+    background-color: #000;
+}

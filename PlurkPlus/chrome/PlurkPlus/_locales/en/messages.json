@@ -1,0 +1,82 @@
+{
+  "extDescription": {
+    "message": "Show the number of unread plurk, allow to share link on plurk and more other feature"
+  },
+  "disable": {
+    "message": "Disable"
+  },
+  "enable": {
+    "message": "Enable"
+  },
+  "gotoPlurk": {
+    "message": "Go to Plurk"
+  },
+  "markAllAsRead": {
+    "message": "Mark all as Read"
+  },
+  "mustLogin": {
+    "message": "Login first"
+  },
+  "msg_loginError": {
+    "message": "Error while login, check username and/or password"
+  },
+  "msg_loginMandatoryFields": {
+    "message": "Username and password are mandatory"
+  },
+  "label_nickname": {
+    "message": "Nickname or email:"
+  },
+  "label_password": {
+    "message": "Password:"
+  },
+  "label_save": {
+    "message": "Save"
+  },
+  "label_refreshRate": {
+    "message": "Refresh time (seconds):"
+  },
+  "msg_refreshError": {
+    "message": "Refresh time must be greater than 2 seconds"
+  },
+
+  "ctx_share": {
+    "message": "Share $SHARE_TYPE$...",
+    "placeholders": {
+      "SHARE_TYPE": {
+        "content": "$1",
+        "example": "image"
+      }
+    }
+  },
+  "ctx_shareText": {
+    "message": "Insert text for the link (can be blank)"
+  },
+  "ctx_shareTooManyChars": {
+    "message": "Text too long ($CHARS$), max $MAX_CHARS$ characters",
+    "placeholders": {
+      "CHARS": {
+        "content": "$1",
+        "example": "160"
+      },
+      "MAX_CHARS": {
+        "content": "$2",
+        "example": "140"
+      }
+    }
+  },
+  "ctx_page": {
+    "message": "page"
+  },
+  "ctx_link": {
+    "message": "link"
+  },
+  "ctx_image": {
+    "message": "image"
+  },
+  "ctx_video": {
+    "message": "video"
+  },
+  "ctx_audio": {
+    "message": "audio"
+  }
+}

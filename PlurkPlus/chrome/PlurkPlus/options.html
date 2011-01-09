@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="js/common.js"></script>
+        <script src="js/plurk.js"></script>
+        <script src="js/options.js"></script>
+        <link type="text/css" href="css/common.css" rel="stylesheet"/>
+        <link type="text/css" href="css/options.css" rel="stylesheet"/>
+    </head>
+    <body onload="options.init();">
+        <div id="error-container" class="corner">
+        </div>
+        <div id="login-container">
+        <form onsubmit="return options.save();">
+            <fieldset class="corner">
+                <legend class="corner">Plurk Plus</legend>
+            <label>
+                <span id="label-nickname"></span>
+                <input type="text" value="" id="username" class="corner">
+            </label>
+            <label>
+                <span id="label-password"></span>
+                <input type="password" value="" id="password" class="corner">
+            </label>
+            <label>
+                <span id="label-refresh-rate"></span>
+                <input type="text" value="" id="refresh-rate">
+            </label>
+            <p id="save-box">
+                <input id="save" type="submit" value="" class="button corner">
+            </p>
+        </form>
+        </div>
+    </body>
+</html>

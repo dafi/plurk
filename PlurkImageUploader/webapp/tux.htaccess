@@ -1,0 +1,2 @@
+AddHandler x-httpd-php5 .php
+AddType application/x-httpd-php5 .php

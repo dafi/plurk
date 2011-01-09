@@ -1,0 +1,11 @@
+body {
+    font-size: 13px;
+}
+
+* {
+    font-family: Verdana, Arial, Tahoma, sans-serif;
+}
+
+.corner {
+  border-radius: 0.4em;
+}

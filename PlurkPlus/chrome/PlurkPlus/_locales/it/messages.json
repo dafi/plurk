@@ -1,0 +1,82 @@
+{
+  "extDescription": {
+    "message": "Visualizza il numero di plurk non letti, permette di condividere link su plurk ed altre funzionalita'"
+  },
+  "disable": {
+    "message": "Disabilita"
+  },
+  "enable": {
+    "message": "Abilita"
+  },
+  "gotoPlurk": {
+    "message": "Vai a Plurk"
+  },
+  "mustLogin": {
+    "message": "Accedi"
+  },
+  "markAllAsRead": {
+    "message": "Marca tutti come letti"
+  },
+  "msg_loginError": {
+    "message": "Errore durante il login, verificare username e/o password"
+  },
+  "msg_loginMandatoryFields": {
+    "message": "Username e password sono obbligatori"
+  },
+  "label_nickname": {
+    "message": "Nickname o email:"
+  },
+  "label_password": {
+    "message": "Password:"
+  },
+  "label_save": {
+    "message": "Salva"
+  },
+  "label_refreshRate": {
+    "message": "Aggiornamento (secondi):"
+  },
+  "msg_refreshError": {
+    "message": "Il tempo di aggiornamento deve essere maggiore di 2 secondi"
+  },
+
+  "ctx_share": {
+    "message": "Condividi $SHARE_TYPE$...",
+    "placeholders": {
+      "SHARE_TYPE": {
+        "content": "$1",
+        "example": "image"
+      }
+    }
+  },
+  "ctx_shareText": {
+    "message": "Inserisci il testo per il link (puo' essere vuoto)"
+  },
+  "ctx_shareTooManyChars": {
+    "message": "Testo troppo lungo ($CHARS$), max $MAX_CHARS$ caratteri",
+    "placeholders": {
+      "CHARS": {
+        "content": "$1",
+        "example": "160"
+      },
+      "MAX_CHARS": {
+        "content": "$2",
+        "example": "140"
+      }
+    }
+  },
+  "ctx_page": {
+    "message": "pagina"
+  },
+  "ctx_link": {
+    "message": "link"
+  },
+  "ctx_image": {
+    "message": "immagine"
+  },
+  "ctx_video": {
+    "message": "video"
+  },
+  "ctx_audio": {
+    "message": "audio"
+  }
+}
