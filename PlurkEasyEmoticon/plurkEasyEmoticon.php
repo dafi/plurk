@@ -1,5 +1,9 @@
 <?php
-    $jsmin = file_get_contents('jsmin.js');
+    if ($argc < 2) {
+        echo 'Syntax: jsmin file' . "\n";
+        return;
+    }
+    $jsmin = file_get_contents($argv[1]);
     $jsmin = str_replace("\n\r", ';', $jsmin);
     $jsmin = str_replace("\n", ';', $jsmin);
     $jsmin = str_replace("\r", ';', $jsmin);
