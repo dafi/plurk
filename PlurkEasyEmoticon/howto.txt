@@ -3,6 +3,6 @@ How to generate the HTML page with minified js
 1. copy in CB plurkEasyEmoticon.js
 2. go to http://jscompress.com/
 3. paste code
-4. copy generated code and save as jsmin.js
+4. copy generated code and save as /tmp/jsmin.js
 5. run from shell ./mklet.sh
 6. commit to github plurkEasyEmoticon.html

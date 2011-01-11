@@ -1,2 +1,1 @@
-php plurkEasyEmoticon.php  >plurkEasyEmoticon.html
-rm jsmin.js
+php plurkEasyEmoticon.php /tmp/jsmin.js >/tmp/plurkEasyEmoticon.html
