@@ -61,7 +61,19 @@ var plurkEasyEmoticon = {
         {imgUrl:'http://statics.plurk.com/846277f0a154dc95a08594b7d32a5ccd.gif', codeText:'(ninja)'},
         {imgUrl:'http://statics.plurk.com/843739a95294fd0bf4c958840b46408f.gif', codeText:'(haha)'},
         {imgUrl:'http://statics.plurk.com/22416dced8b59446db8cd366cc925d09.gif', codeText:'(evilsmirk)'},
-        {imgUrl:'http://statics.plurk.com/e3f0f67ca3af62e34f13abf1d036a010.gif', codeText:'(eyeroll)'},
+        {imgUrl:'http://statics.plurk.com/e3f0f67ca3af62e34f13abf1d036a010.gif', codeText:'(eyeroll)'}
+    ],
+
+    karma100: [
+        {imgUrl:'http://statics.plurk.com/84f94a47fcaf1df0a5f17a1cfa52fa64.gif', codeText:'(muhaha)'},
+        {imgUrl:'http://statics.plurk.com/44117848701cd748460921cfea5c3781.gif', codeText:'(taser)'},
+        {imgUrl:'http://statics.plurk.com/88f6dda8d290f66a923c1116a2a2b4ab.gif', codeText:'(banana_ninja)'},
+        {imgUrl:'http://statics.plurk.com/eeaf87c619a0221ec9fa06413fd2d5dc.gif', codeText:'(beer)'},
+        {imgUrl:'http://statics.plurk.com/48ec47723cb34be3fcbc914e591e69cd.gif', codeText:'(coffee)'},
+        {imgUrl:'http://statics.plurk.com/259a728a690204148037fbee7e2ca2d3.gif', codeText:'(fish_hit)'},
+        {imgUrl:'http://statics.plurk.com/4383af0e055bce112176c5104deeaadf.gif', codeText:'(muscle)'},
+        {imgUrl:'http://statics.plurk.com/70722ab5756c3b89c86d85feab91725d.gif', codeText:'(smileydance)'},
+        {imgUrl:'http://statics.plurk.com/91cf07e3aa16738943fa1147940b48ea.gif', codeText:'(morning)'}
     ],
 
     hiddenSet:[
@@ -79,10 +91,10 @@ var plurkEasyEmoticon = {
         {imgUrl:'http://statics.plurk.com/bac8c8392f7ca8f5ac74612be4d08b74.gif', codeText:'(wave_okok)'},
         {imgUrl:'http://statics.plurk.com/a555399b40c379adca5b6f5bad5bf732.gif', codeText:'(dance_okok)'},
         {imgUrl:'http://statics.plurk.com/b3b9856e557fcc2700fd41c53f9d4910.gif', codeText:'(droid_dance)'},
-        {imgUrl:'http://statics.plurk.com/1a5f23ed863e70e52f239b045a48e6fb.gif', codeText:'(xmas1)'},
-        {imgUrl:'http://statics.plurk.com/f5dbd5fdf5f5df69cfb024d6be76a76b.gif', codeText:'(xmas2)'},
-        {imgUrl:'http://statics.plurk.com/e902170e97aee14836b5df6b0fe61ba2.gif', codeText:'(xmas3)'},
-        {imgUrl:'http://statics.plurk.com/e476574723d5042f24658fa36866bd92.gif', codeText:'(xmas4)'},
+        //{imgUrl:'http://statics.plurk.com/1a5f23ed863e70e52f239b045a48e6fb.gif', codeText:'(xmas1)'},
+        //{imgUrl:'http://statics.plurk.com/f5dbd5fdf5f5df69cfb024d6be76a76b.gif', codeText:'(xmas2)'},
+        //{imgUrl:'http://statics.plurk.com/e902170e97aee14836b5df6b0fe61ba2.gif', codeText:'(xmas3)'},
+        //{imgUrl:'http://statics.plurk.com/e476574723d5042f24658fa36866bd92.gif', codeText:'(xmas4)'},
         {imgUrl:'http://statics.plurk.com/cfdd2accc1188f5fbc62e149074c7f29.png', codeText:'(fuu)'},
         {imgUrl:'http://statics.plurk.com/828b9819249db696701ae0987fba3638.png', codeText:'(gfuu)'},
         {imgUrl:'http://statics.plurk.com/1bd653e166492e40e214ef6ce4dd716f.png', codeText:'(yay)'},
@@ -96,18 +108,32 @@ var plurkEasyEmoticon = {
         isBarVisible: false,
         barHeight: 96,
         lastInputFocused: null,
-        updaterZIndex: document.getElementById('updater').style.zIndex,
 
         init: function() {
             if (this.easyDiv) {
                 return;
             }
+            this.updater = document.getElementById('updater');
+            this.updaterZIndex = this.updater ? this.updater.style.zIndex : '';
+
             this.easyDiv = document.createElement('div');
             this.easyDiv.setAttribute('id', 'plurkEasyEmoticonDiv');
             this.easyDiv.setAttribute('style', 'z-index:9999; width:100%; position: fixed; bottom:0; background-color:#fff;')
             //this.easyDiv.setAttribute('style', 'z-index:9999; width:100%; height:' + this.barHeight + 'px; position: fixed; top:0; background-color:#fff;')
             //this.easyDiv.setAttribute('style', 'z-index:9999; overflow-y:scroll; width:' + this.barWidth + 'px; height:100%; position: fixed; top:0; right:0; background-color:#fff;')
-            var allSets = [this.basicSet, this.extraSet, this.hiddenSet];
+            var allSets = [this.basicSet, this.extraSet];
+            
+            // on plurk mobile allow to see all images without using
+            // the real karma value
+            var karma = typeof(SiteState) != 'undefined'
+                && SiteState.getSessionUser()
+                && SiteState.getSessionUser().karma
+                || 100;
+
+            if (karma >= 100) {
+                allSets.push(this.karma100);
+            }
+            allSets.push(this.hiddenSet);
             for (var s in allSets) {
                 var currSet = allSets[s];
                 for (var i in currSet) {
@@ -117,7 +143,7 @@ var plurkEasyEmoticon = {
                     img.setAttribute('src', eicon.imgUrl);
                     img.addEventListener('click', function(event) {
                         if (!plurkEasyEmoticon.lastInputFocused) {
-                            plurkEasyEmoticon.lastInputFocused = document.getElementById('input_big');
+                            return;
                         }
                         var text = plurkEasyEmoticon.lastInputFocused.value;
                         if (text.length > 0) {
@@ -132,30 +158,51 @@ var plurkEasyEmoticon = {
                 }
             }
             document.body.appendChild(this.easyDiv);
+            
+            var style = document.createElement('style');
+            style.appendChild(document.createTextNode('#plurkEasyEmoticonDiv img:hover {border: 2px solid #D3A13E;}'));
+            document.getElementsByTagName('body')[0].appendChild(style);
+            
             this.isBarVisible = true;
             window.addEventListener('mousemove', function(event) {
-                var y = document.documentElement.clientHeight - event.clientY;
+                var y = document.documentElement.clientHeight - event.clientY - 16;
                 
                 if (plurkEasyEmoticon.isBarVisible) {
                     if (y > plurkEasyEmoticon.barHeight) {
                         plurkEasyEmoticon.easyDiv.style.display = 'none';
-                        document.getElementById('updater').style.zIndex = plurkEasyEmoticon.updaterZIndex;
+                        if (plurkEasyEmoticon.updater) {
+                            plurkEasyEmoticon.updater.style.zIndex = plurkEasyEmoticon.updaterZIndex;
+                        }
                         plurkEasyEmoticon.isBarVisible = false;
                     }
                 } else {
                     if (y < plurkEasyEmoticon.barHeight) {
                         plurkEasyEmoticon.easyDiv.style.display = 'block';
-                        document.getElementById('updater').style.zIndex = '10000';
+                        if (plurkEasyEmoticon.updater) {
+                            plurkEasyEmoticon.updater.style.zIndex = '10000';
+                        }
                         plurkEasyEmoticon.isBarVisible = true;
                     }
                 }
             }, true);
-            document.getElementById('input_big').addEventListener('focus', function(event) {
-                plurkEasyEmoticon.lastInputFocused = event.target;
-            }, true);
-            document.getElementById('input_small').addEventListener('focus', function(event) {
-                plurkEasyEmoticon.lastInputFocused = event.target;
-            }, true);
+            var arr = [];
+            if (document.getElementById('input_big')) {
+                arr.push(document.getElementById('input_big'));
+                this.lastInputFocused = document.getElementById('input_big');
+            }
+            if (document.getElementById('input_small')) {
+                arr.push(document.getElementById('input_small'));
+            }
+            var els = document.getElementsByName('content');
+            if (els && els.length == 1) {
+                arr.push(els[0]);
+                this.lastInputFocused = els[0];
+            }
+            for (var i in arr) {
+                arr[i].addEventListener('focus', function(event) {
+                    plurkEasyEmoticon.lastInputFocused = event.target;
+                }, true);
+            }
         }
 };
 //plurkEasyEmoticon.init();
