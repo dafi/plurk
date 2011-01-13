@@ -84,12 +84,18 @@ var plurkEasyEmoticon = {
         {imgUrl:'http://statics.plurk.com/deda4d9f78ad528d725e3a6bfbf6352f.gif', codeText:'(\u0420\u0443\u0441\u0441\u043A\u0438\u0439)'},
         {imgUrl:'http://statics.plurk.com/0efc4d55d28704f4370ef874ae906161.gif', codeText:'(code)'},
         {imgUrl:'http://statics.plurk.com/4c40d16a0d369b895c08f2e33d062ec8.gif', codeText:'(yarr)'},
+		{imgUrl:'http://statics.plurk.com/6675254cd7449b1847a93b0024127eae.gif', codeText:'(angry_okok)'},
+		{imgUrl:'http://statics.plurk.com/8855f56400a936db07f348d9290adaac.gif', codeText:'(code_okok)'},
         {imgUrl:'http://statics.plurk.com/fcd28d7d78ec1f828c76930fa63270e6.gif', codeText:'(gym_okok)'},
         {imgUrl:'http://statics.plurk.com/71acd802cc931649dd9a371ccf70bad2.gif', codeText:'(hungry_okok)'},
         {imgUrl:'http://statics.plurk.com/74030f05f06547a3d26b02ccbf0bbac7.gif', codeText:'(music_okok)'},
         {imgUrl:'http://statics.plurk.com/3acbaf42504fff32c5eac4f12083ce56.gif', codeText:'(yarr_okok)'},
         {imgUrl:'http://statics.plurk.com/bac8c8392f7ca8f5ac74612be4d08b74.gif', codeText:'(wave_okok)'},
+		{imgUrl:'http://statics.plurk.com/feb43dbbbf2763905571060be9a496d1.gif', codeText:'(no_dance)'},
+		{imgUrl:'http://statics.plurk.com/5b51892d7d1f392d93ea7fe26e5100f4.gif', codeText:'(banana_gym)'},
         {imgUrl:'http://statics.plurk.com/a555399b40c379adca5b6f5bad5bf732.gif', codeText:'(dance_okok)'},
+		{imgUrl:'http://statics.plurk.com/6de58c967f1c2797d250a713ba50eddd.gif', codeText:'(dance_yarr)'},
+		{imgUrl:'http://statics.plurk.com/88fac5a4b99110a35d4e4794dad58ab4.gif', codeText:'(taser_okok)'},
         {imgUrl:'http://statics.plurk.com/b3b9856e557fcc2700fd41c53f9d4910.gif', codeText:'(droid_dance)'},
         //{imgUrl:'http://statics.plurk.com/1a5f23ed863e70e52f239b045a48e6fb.gif', codeText:'(xmas1)'},
         //{imgUrl:'http://statics.plurk.com/f5dbd5fdf5f5df69cfb024d6be76a76b.gif', codeText:'(xmas2)'},
@@ -101,7 +107,8 @@ var plurkEasyEmoticon = {
         {imgUrl:'http://statics.plurk.com/3fe6cf919158597d7ec74f8d90f0cc9f.png', codeText:'(gyay)'},
         {imgUrl:'http://statics.plurk.com/9c5c54081547d2ad903648f178fcc595.png', codeText:'(bah)'},
         {imgUrl:'http://statics.plurk.com/2da76999ca3716fb4053f3332270e5c9.png', codeText:'(gbah)'},
-        {imgUrl:'http://statics.plurk.com/f73b773aa689647cb09f57f67a83bb89.png', codeText:'(troll)'}
+        {imgUrl:'http://statics.plurk.com/f73b773aa689647cb09f57f67a83bb89.png', codeText:'(troll)'},
+		{imgUrl:'http://statics.plurk.com/45beda260eddc28c82c0d27377e7bf42.png', codeText:'(gtroll)'}
         ],
 
         easyDiv: document.getElementById('plurkEasyEmoticonDiv'),
