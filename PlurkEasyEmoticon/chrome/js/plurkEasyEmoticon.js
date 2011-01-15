@@ -115,8 +115,14 @@ var plurkEasyEmoticon = {
     isBarVisible: false,
     barHeight: 96,
     lastInputFocused: null,
+    isEnabled: true,
 
     init: function() {
+        if (typeof(window.localStorage['enabled']) == 'undefined') {
+            window.localStorage['enabled'] = 'true';
+        }
+        this.isEnabled = window.localStorage['enabled'] == 'true'
+
         this.updater = document.getElementById('updater');
         this.updaterZIndex = this.updater ? this.updater.style.zIndex : '';
 
@@ -169,7 +175,23 @@ var plurkEasyEmoticon = {
             }
         }
         document.body.appendChild(this.easyDiv);
-        
+
+        var menu = document.querySelector('td.content');
+        if (menu) {
+            var item = document.createElement('a');
+            item.setAttribute('href', '#');
+            item.addEventListener('click', function(event) {
+                plurkEasyEmoticon.setEnable(!plurkEasyEmoticon.isEnabled);
+            }, true);
+            var span = document.createElement('span');
+            item.setAttribute('id', 'plurkEasyEmoticon-enable-menu');
+            span.appendChild(document.createTextNode('Disable Plurk Emoticon'));
+            item.appendChild(span);
+
+            menu.appendChild(item);
+            this.setEnable(plurkEasyEmoticon.isEnabled);
+        }
+
         this.isBarVisible = true;
         window.addEventListener('mousemove', function(event) {
             var y = document.documentElement.clientHeight - event.clientY - 16;
@@ -183,12 +205,14 @@ var plurkEasyEmoticon = {
                     plurkEasyEmoticon.isBarVisible = false;
                 }
             } else {
-                if (y < plurkEasyEmoticon.barHeight) {
-                    plurkEasyEmoticon.easyDiv.style.display = 'block';
-                    if (plurkEasyEmoticon.updater) {
-                        plurkEasyEmoticon.updater.style.zIndex = '10000';
+                if (plurkEasyEmoticon.isEnabled) {
+                    if (y < plurkEasyEmoticon.barHeight) {
+                        plurkEasyEmoticon.easyDiv.style.display = 'block';
+                        if (plurkEasyEmoticon.updater) {
+                            plurkEasyEmoticon.updater.style.zIndex = '10000';
+                        }
+                        plurkEasyEmoticon.isBarVisible = true;
                     }
-                    plurkEasyEmoticon.isBarVisible = true;
                 }
             }
         }, true);
@@ -204,6 +228,19 @@ var plurkEasyEmoticon = {
         }, true);
     },
 
+    setEnable: function(isEnabled) {
+        plurkEasyEmoticon.isEnabled = isEnabled;
+        window.localStorage['enabled'] = plurkEasyEmoticon.isEnabled ? 'true' : 'false';
+        var menuLabel = document.getElementById('plurkEasyEmoticon-enable-menu');
+        if (menuLabel) {
+            if (plurkEasyEmoticon.isEnabled) {
+                menuLabel.innerHTML = 'Disable Plurk Emoticon';
+            } else {
+                menuLabel.innerHTML = 'Enable Plurk Emoticon';
+            }
+        }
+    },
+    
     hasClass: function(el, cls) {
         return el.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
     },
