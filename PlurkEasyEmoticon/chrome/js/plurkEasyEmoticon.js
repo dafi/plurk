@@ -108,7 +108,16 @@ var plurkEasyEmoticon = {
         {imgUrl:'http://statics.plurk.com/9c5c54081547d2ad903648f178fcc595.png', codeText:'(bah)'},
         {imgUrl:'http://statics.plurk.com/2da76999ca3716fb4053f3332270e5c9.png', codeText:'(gbah)'},
         {imgUrl:'http://statics.plurk.com/f73b773aa689647cb09f57f67a83bb89.png', codeText:'(troll)'},
-        {imgUrl:'http://statics.plurk.com/45beda260eddc28c82c0d27377e7bf42.png', codeText:'(gtroll)'}
+        {imgUrl:'http://statics.plurk.com/45beda260eddc28c82c0d27377e7bf42.png', codeText:'(gtroll)'},
+
+        {imgUrl:'http://statics.plurk.com/8590888362ae83daed52e4ca73c296a6.png', codeText: '(aha)'},
+        {imgUrl:'http://statics.plurk.com/c7551098438cc28ec3b54281d4b09cc3.png', codeText: '(gaha)'},
+        {imgUrl:'http://statics.plurk.com/cfd84315ebceec0c4389c51cf69132bd.png', codeText: '(whatever)'},
+        {imgUrl:'http://statics.plurk.com/0e0bf1ec2c2958799666f3995ef830ca.png', codeText: '(gwhatever)'},
+        {imgUrl:'http://statics.plurk.com/e2998ca75f80c1c4a5508c549e3980a6.png', codeText: '(pokerface)'},
+        {imgUrl:'http://statics.plurk.com/c6ad1c4f9e11f6859a1ba39c4341ef8b.png', codeText: '(gpokerface)'},
+        {imgUrl:'http://statics.plurk.com/4a61085f1c6a639f028cd48ae97d07d0.png', codeText: '(yea)'},
+        {imgUrl:'http://statics.plurk.com/53253ca60f5831f0812954213a2e9bb3.png', codeText: '(gyea)'}
         ],
 
     easyDiv: document.getElementById('plurkEasyEmoticonDiv'),
@@ -176,7 +185,7 @@ var plurkEasyEmoticon = {
         }
         document.body.appendChild(this.easyDiv);
 
-        var menu = document.querySelector('td.content');
+        var menu = document.getElementById('top_login');
         if (menu) {
             var item = document.createElement('a');
             item.setAttribute('href', '#');
@@ -188,7 +197,9 @@ var plurkEasyEmoticon = {
             span.appendChild(document.createTextNode('Disable Plurk Emoticon'));
             item.appendChild(span);
 
-            menu.appendChild(item);
+            var inviteMenu = document.querySelector('a[href="/Friends/inviteFriends"]');
+            inviteMenu.style.display = 'none';
+            menu.insertBefore(item, inviteMenu);
             this.setEnable(plurkEasyEmoticon.isEnabled);
         }
 
