@@ -59,7 +59,8 @@ var plurkEasyEmoticon = {
             for (var i in currSet) {
                 var eicon = currSet[i];
                 var img = document.createElement('img');
-                img.setAttribute('alt', eicon[0]);
+                // plurk developers are to lazy to fix the three 'l' typo
+                img.setAttribute('alt', eicon[0] == '(eyerolll)' ? '(eyeroll)' : eicon[0]);
                 img.setAttribute('src', eicon[1]);
                 img.addEventListener('click', function(event) {
                     if (!plurkEasyEmoticon.lastInputFocused) {
