@@ -41,3 +41,56 @@ function getRefreshRate() {
 
     return refresh ? refresh : DEFAULT_REFRESH_RATE;
 }
+
+function postPlurkFromRequest(request, sender, sendResponse) {
+    if (request.typeReq == "post") {
+        var qualifier = ':';
+        var lines = $.stripEmptyLines(request.content);
+
+        if (lines.length == 0) {
+            sendResponse({error: 'No text to publish'});
+            return;
+        }
+        lines = $.wrapLines(lines, 140);
+
+        var result = PlurkAPI.add({content: lines[0],
+                                    qualifier: qualifier});
+        var data = result.data;
+        if (data.error_text) {
+            sendResponse({error: data.error_text});
+        } else {
+            for (var i = 1; i < lines.length; i++) {
+                var resultAdd = PlurkAPI.responseAdd({
+                    plurk_id: data.plurk_id,
+                    content: lines[i],
+                    qualifier: qualifier
+                });
+                if (resultAdd.data.error_text) {
+                    sendResponse({error: resultAdd.data.error_text});
+                    return;
+                }
+            }
+            sendResponse({splitCount: lines.length});
+        }
+    } else {
+        sendResponse({});
+    }
+}
+
+function showMessage(htmlText, messageType) {
+    messageType = typeof(messageType) == "undefined" ? 'info' : messageType;
+    $('#dialog-info-box').hide();
+    $('#dialog-error-box').hide();
+    $('#dialog-progress-box').hide();
+
+    if (messageType == 'error') {
+        $('#dialog-error-box').show();
+        $('#dialog-error-message').append(htmlText);
+    } else if (messageType == 'info') {
+        $('#dialog-info-box').show();
+        $('#dialog-info-message').append(htmlText);
+    } else if (messageType == 'progress') {
+        $('#dialog-progress-box').show();
+        $('#dialog-progress-message').append(htmlText);
+    }
+}

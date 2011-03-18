@@ -17,6 +17,9 @@
   "markAllAsRead": {
     "message": "Marca tutti come letti"
   },
+  "postPlurk": {
+    "message": "Scrivi un plurk"
+  },
   "msg_loginError": {
     "message": "Errore durante il login, verificare username e/o password"
   },

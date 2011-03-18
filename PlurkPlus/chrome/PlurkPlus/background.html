@@ -5,6 +5,11 @@
         <script src="js/plurk.js"></script>
         <script src="js/background.js"></script>
         <script src="js/ctxmenu.js"></script>
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/jquery.strings.js"></script>
+        <script type="text/javascript">
+            chrome.extension.onRequest.addListener(postPlurkFromRequest);
+        </script>
     </head>
     <body onload="startGetCount();">
     </body>

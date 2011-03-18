@@ -17,7 +17,8 @@ if (typeof(popup) == 'undefined') {
         this.toggleCountLabel(isEnabled());
         initLabels({'goto-plurk': 'gotoPlurk',
                     'must-login': 'mustLogin',
-                    'mark-all-as-read': 'markAllAsRead'});
+                    'mark-all-as-read': 'markAllAsRead',
+                    'post-plurk': 'postPlurk'});
 
         widgets.statusText.innerHTML = chrome.extension.getBackgroundPage().lastErrorMessage;
 
@@ -96,5 +97,18 @@ if (typeof(popup) == 'undefined') {
         } else {
             widgets.statusText.innerHTML = 'Unable to read plurks.';
         }
+    }
+    
+    this.postPlurk = function() {
+        chrome.windows.getCurrent(function(winInstance) { 
+            chrome.tabs.getSelected(winInstance.id, function(tabInstance) {
+                chrome.tabs.create({
+                    "windowId": winInstance.id,
+                    "index": tabInstance.index + 1,
+                    "url": chrome.extension.getURL('post.html'),
+                    "selected": true
+                });
+            });
+        });
     }
 }).apply(popup);

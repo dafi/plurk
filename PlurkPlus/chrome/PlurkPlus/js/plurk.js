@@ -49,4 +49,8 @@ if (typeof(PlurkAPI) == 'undefined') {
     this.add = function(params) {
         return doRequest('/API/Timeline/plurkAdd', params);
     }
+    
+    this.responseAdd = function(params) {
+        return doRequest('/API/Responses/responseAdd', params);
+    }
 }).apply(PlurkAPI);
