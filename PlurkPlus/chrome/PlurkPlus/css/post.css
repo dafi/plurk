@@ -1,0 +1,23 @@
+body {
+  background-color: #555;
+  color: #FFF;
+  font: 70% sans-serif;
+}
+
+a {
+  color: #DBCD34;
+}
+
+.button-box {
+  float: right;
+  margin-top: 0.4em;
+}
+
+fieldset legend {
+  width: 99%;
+}
+
+.icon-progress {
+  width: 16px; height: 16px; 
+  background-image: url('../images/progress-w.gif');
+}

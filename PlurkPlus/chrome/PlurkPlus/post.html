@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+        <title>Publish to Plurk</title>
+
+        <link type="text/css" href="css/post.css" rel="stylesheet"/>
+        <link type="text/css" href="css/dialogs.css" rel="stylesheet"/>
+        <link type="text/css" href="css/post/jquery-ui.css" rel="stylesheet" />
+
+        <script type="text/javascript" src="js/common.js"></script>
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/jquery.strings.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+
+        <script type="text/javascript">
+            $(function() {
+                $('#dialog-form').dialog({
+                    autoOpen: true,
+                    width: 600,
+                    height: 340,
+                    minHeight: 300,
+                    modal: false,
+                    resize: "auto",
+                    buttons: {
+                        'Publish Plurk': function() {
+                            showMessage('Publishing plurk...', 'progress');
+                            chrome.extension.sendRequest({
+                                    typeReq: 'post',
+                                    content: $('#dialog-modify-caption').val(),
+                                    splitText: true
+                                },
+                                function(response) {
+                                    if (response.error) {
+                                        showMessage(response.error, 'error');
+                                    } else {
+                                        $('#dialog-modify-caption').val('');
+
+                                        showMessage('Plurk published, splitted in ' + response.splitCount + ' response(s)');
+                                    }
+                            });
+                            $('#dialog-modify-caption').focus();
+                        },
+                        Close: function() {
+                            $(this).dialog('close');
+                        }
+                    },
+                    open: function() {
+                        $('#dialog-modify-caption').focus();
+                    },
+                    close: function() {
+                        window.close();
+                    }
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <h1 style="font-size:18px;text-transform:uppercase">this is an alpha feature, it may be very bugged
+        <br/>
+        Use <a href="https://github.com/dafi/plurk/issues">Issue Tracker</a> to report bugs
+        <br/>
+        Some URLS may be splitted incorrectly
+        </h1>
+
+<div id="dialogs-container" style="display:none">
+    <div id="dialog-form" title="Write a plurk">
+        <form action="">
+            <div id="dialog-modify-controls">
+                <label for="dialog-modify-caption">Plurk Text</label>
+                <textarea id="dialog-modify-caption" rows="6"></textarea>
+
+                <div id="progress-panel" class="ui-corner-all dialog-message-box">
+                    <p id="dialog-progress-publish"><span class="icon-progress" style="float: left; margin-right: .3em;"></span>&nbsp;</p>
+                </div>
+
+                <div id="dialog-info-box" class="ui-state-highlight ui-corner-all dialog-message-box"> 
+                    <p id="dialog-info-message"><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>&nbsp;</p>
+		</div>
+
+		<div id="dialog-error-box" class="ui-state-error ui-corner-all dialog-message-box">
+                    <p id="dialog-error-message"><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>&nbsp;</p>
+		</div>
+
+                <label class="dialog-help">Don't worry if yor plurk is longer than 140 characters, it will be splitted by PlurkPlus <img src="http://statics.plurk.com/57c69f50e40a283dcd2e7b56fc191abe.gif"/></label>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+    </body>
+</html>

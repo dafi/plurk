@@ -1,0 +1,22 @@
+#dialog-form input[type='text'],
+#dialog-form textarea {
+  width: 100%;
+}
+
+#dialog-form fieldset {
+  background-attachment: scroll;
+  background-position: 4px 4px;
+  background-repeat: no-repeat;
+}
+
+.dialog-message-box {
+  margin-top: 5px;
+  padding: 0 .7em;
+  display:none;
+}
+
+.dialog-help {
+  position: absolute;
+  left: 4px;
+  bottom: 1px;
+}
