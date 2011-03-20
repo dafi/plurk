@@ -59,18 +59,29 @@ function postPlurkFromRequest(request, sender, sendResponse) {
         if (data.error_text) {
             sendResponse({error: data.error_text});
         } else {
-            for (var i = 1; i < lines.length; i++) {
-                var resultAdd = PlurkAPI.responseAdd({
-                    plurk_id: data.plurk_id,
-                    content: lines[i],
-                    qualifier: qualifier
-                });
-                if (resultAdd.data.error_text) {
-                    sendResponse({error: resultAdd.data.error_text});
-                    return;
+            var i = 1;
+
+            var intervalID = setInterval(function() {
+                // to mitigate anti flood error send 3 response per time that wait
+                var lastIndex = Math.min(i + 3, lines.length);
+
+                for (; i < lastIndex; i++) {
+                    var resultAdd = PlurkAPI.responseAdd({
+                        plurk_id: data.plurk_id,
+                        content: lines[i],
+                        qualifier: qualifier
+                    });
+                    if (resultAdd.data.error_text) {
+                        clearInterval(intervalID);
+                        sendResponse({error: resultAdd.data.error_text});
+                        return;
+                    }
                 }
-            }
-            sendResponse({splitCount: lines.length});
+                if (i >= lines.length) {
+                    clearInterval(intervalID);
+                    sendResponse({splitCount: lines.length});
+                }
+            }, 1500);
         }
     } else {
         sendResponse({});
@@ -85,12 +96,12 @@ function showMessage(htmlText, messageType) {
 
     if (messageType == 'error') {
         $('#dialog-error-box').show();
-        $('#dialog-error-message').append(htmlText);
+        $('#dialog-error-message').html(htmlText);
     } else if (messageType == 'info') {
         $('#dialog-info-box').show();
-        $('#dialog-info-message').append(htmlText);
+        $('#dialog-info-message').html(htmlText);
     } else if (messageType == 'progress') {
         $('#dialog-progress-box').show();
-        $('#dialog-progress-message').append(htmlText);
+        $('#dialog-progress-message').html(htmlText);
     }
 }
