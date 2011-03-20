@@ -21,3 +21,8 @@ fieldset legend {
   width: 16px; height: 16px; 
   background-image: url('../images/progress-w.gif');
 }
+
+.icon-padder {
+  float: left;
+  margin-right: .3em;
+}
