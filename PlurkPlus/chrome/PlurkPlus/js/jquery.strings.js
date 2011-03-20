@@ -38,8 +38,10 @@
 
             for (var i in lines) {
                 var m = lines[i].match(re);
-                for (var j = 0; j < m.length; j++) {
-                    arr.push(m[j]);
+                if (m) {
+                    for (var j = 0; j < m.length; j++) {
+                        arr.push(m[j]);
+                    }
                 }
             }
 
