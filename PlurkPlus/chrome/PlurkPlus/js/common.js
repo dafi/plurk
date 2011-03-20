@@ -73,7 +73,8 @@ function postPlurkFromRequest(request, sender, sendResponse) {
                     });
                     if (resultAdd.data.error_text) {
                         clearInterval(intervalID);
-                        sendResponse({error: resultAdd.data.error_text});
+                        sendResponse({error: resultAdd.data.error_text,
+                                     remainingLines: lines.slice(i)});
                         return;
                     }
                 }
@@ -103,5 +104,7 @@ function showMessage(htmlText, messageType) {
     } else if (messageType == 'progress') {
         $('#dialog-progress-box').show();
         $('#dialog-progress-message').html(htmlText);
+    } else if (messageType == 'hide') {
+        // nothing to to
     }
 }

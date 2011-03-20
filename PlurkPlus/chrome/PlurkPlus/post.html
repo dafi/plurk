@@ -14,7 +14,37 @@
         <script type="text/javascript" src="js/jquery-ui.js"></script>
 
         <script type="text/javascript">
+            function updateCharCounter() {
+                var content = $(this).val();
+                var lines = $.stripEmptyLines(content);
+                var count = 0;
+                
+                for (var i = 0; i < lines.length; i++) {
+                    count += lines[i].length;
+                }
+                if (count == 0) {
+                    // strangely hiding messages the character counter
+                    // is no longer visible so we put a nbsp
+                    $('#char-count').html('&nbsp;');
+                } else {
+                    showMessage('', 'hide');
+                    if (lines.length) {
+                        lines = $.wrapLines(lines, 140);
+                    }
+                    var message = count + ' character(s) will be splitted in ' + lines.length + ' response(s)';
+                    if (lines.length > 12) {
+                        message += '<p style="color:red">Anti flood rules allow only 12 responses <img src="http://statics.plurk.com/72ddf2c585fe77dd0be731b19624d8cb.gif"/></p>';
+                    }
+                    $('#char-count').html(message);
+                    $(":button:contains('Publish Plurk')").attr("disabled", lines.length > 12);
+                }
+            }
+
             $(function() {
+                $('#dialog-modify-caption')
+                    .keyup(updateCharCounter)
+                    .keydown(updateCharCounter);
+
                 $('#dialog-form').dialog({
                     autoOpen: true,
                     width: 600,
@@ -25,21 +55,25 @@
                     buttons: {
                         'Publish Plurk': function() {
                             showMessage('Publishing plurk...', 'progress');
+                            $('#dialog-modify-caption').attr('disabled', 'disabled');
                             chrome.extension.sendRequest({
                                     typeReq: 'post',
                                     content: $('#dialog-modify-caption').val(),
                                     splitText: true
                                 },
                                 function(response) {
+                                    $('#dialog-modify-caption').removeAttr('disabled');
+                                    $('#dialog-modify-caption').focus();
                                     if (response.error) {
-                                        showMessage(response.error, 'error');
+                                        $('#dialog-modify-caption').val(response.remainingLines.join('\n'));
+                                        $('#dialog-modify-caption').keydown();
+                                        showMessage(response.error + '<br/>The edit box contains the response(s) not added', 'error');
                                     } else {
                                         $('#dialog-modify-caption').val('');
-
+                                        $('#dialog-modify-caption').keydown();
                                         showMessage('Plurk published, splitted in ' + response.splitCount + ' response(s)');
                                     }
                             });
-                            $('#dialog-modify-caption').focus();
                         },
                         Close: function() {
                             $(this).dialog('close');
@@ -69,6 +103,7 @@
             <div id="dialog-modify-controls">
                 <label for="dialog-modify-caption">Plurk Text</label>
                 <textarea id="dialog-modify-caption" rows="6"></textarea>
+                <label id="char-count"></label>
 
                 <div id="dialog-progress-box" class="ui-corner-all dialog-message-box">
                     <p><span class="icon-progress icon-padder"></span><span id="dialog-progress-message"/></p>
