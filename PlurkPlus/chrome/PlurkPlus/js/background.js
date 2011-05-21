@@ -53,3 +53,14 @@ function stopGetCount() {
     }
     intervalID = null;
 }
+
+chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
+    if (request.method == "isNickLockerEnabled") {
+        var isNickLockerEnabled = typeof(window.localStorage['nickLockerEnabled']) == 'undefined'
+            || window.localStorage['nickLockerEnabled'] == 'true';
+
+        sendResponse({isNickLockerEnabled: isNickLockerEnabled});
+    } else {
+        sendResponse({});
+    }
+});

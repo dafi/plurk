@@ -1,6 +1,6 @@
 {
   "name": "Plurk Plus",
-  "version": "1.3.0.2",
+  "version": "1.3.1",
   "description": "__MSG_extDescription__",
   "background_page": "background.html",
   "browser_action": {
@@ -8,6 +8,13 @@
     "default_icon": "images/icon16-gray.png",
     "popup": "popup.html"
   },
+  "content_scripts": [
+    {
+      "matches": ["http://www.plurk.com/*"],
+      "js": ["js/nickLocker.js"],
+      "run_at": "document_end"
+    }
+   ],
   "permissions": [
     "contextMenus",
     "tabs",

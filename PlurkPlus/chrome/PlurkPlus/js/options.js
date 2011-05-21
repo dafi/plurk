@@ -6,11 +6,18 @@ if (typeof(options) == 'undefined') {
     var usernameWidget;
     var passwordWidget;
     var refreshWidget;
+    var nickLocker;
 
     this.init = function() {
         usernameWidget = document.getElementById('username');
         passwordWidget = document.getElementById('password');
         refreshWidget = document.getElementById('refresh-rate');
+        nickLocker = document.getElementById('nick-locker');
+
+        nickLocker.addEventListener('click', this.onNickLocker, true);
+
+        nickLocker.checked = typeof(window.localStorage['nickLockerEnabled']) == 'undefined'
+            || window.localStorage['nickLockerEnabled'] == 'true';
 
         refreshWidget.value = getRefreshRate();
 
@@ -66,5 +73,9 @@ if (typeof(options) == 'undefined') {
             window.close();
         }
         return errors.length == 0;
+    }
+    
+    this.onNickLocker = function(event) {
+        window.localStorage['nickLockerEnabled'] = event.target.checked ? 'true' : 'false';
     }
 }).apply(options);
