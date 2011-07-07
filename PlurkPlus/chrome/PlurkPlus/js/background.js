@@ -9,6 +9,11 @@ function showCount() {
         if (result.data.all > 0) {
             text = result.data.all + '';
         }
+        if (result.data.private) {
+            chrome.browserAction.setIcon({path: 'images/pm.png'});
+        } else {
+            chrome.browserAction.setIcon({path: 'images/icon16.png'});
+        }
         chrome.browserAction.setBadgeText({text: text});
         lastErrorMessage = '';
     } else if (result.status == 400) {
@@ -57,7 +62,8 @@ function stopGetCount() {
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
     if (request.method == "isNickLockerEnabled") {
         var isNickLockerEnabled = typeof(window.localStorage['nickLockerEnabled']) == 'undefined'
-            || window.localStorage['nickLockerEnabled'] == 'true';
+            ? false
+            : window.localStorage['nickLockerEnabled'] == 'true';
 
         sendResponse({isNickLockerEnabled: isNickLockerEnabled});
     } else {

@@ -17,7 +17,8 @@ if (typeof(options) == 'undefined') {
         nickLocker.addEventListener('click', this.onNickLocker, true);
 
         nickLocker.checked = typeof(window.localStorage['nickLockerEnabled']) == 'undefined'
-            || window.localStorage['nickLockerEnabled'] == 'true';
+            ? false
+            : window.localStorage['nickLockerEnabled'] == 'true';
 
         refreshWidget.value = getRefreshRate();
 
