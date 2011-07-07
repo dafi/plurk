@@ -81,5 +81,22 @@
   },
   "ctx_audio": {
     "message": "audio"
+  },
+  "unread_count": {
+    "message": "Tutti $ALL$, privati $PRIVATE$ e con risposta $RESPONDED$",
+    "placeholders": {
+      "ALL": {
+        "content": "$1",
+        "example": "10"
+      },
+      "PRIVATE": {
+        "content": "$2",
+        "example": "4"
+      },
+      "RESPONDED": {
+        "content": "$3",
+        "example": "2"
+      }
+    }
   }
 }

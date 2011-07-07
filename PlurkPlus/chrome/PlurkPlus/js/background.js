@@ -5,16 +5,7 @@ function showCount() {
     var result = PlurkAPI.getUnreadCount();
 
     if (result.status == 200) {
-        var text = '';
-        if (result.data.all > 0) {
-            text = result.data.all + '';
-        }
-        if (result.data.private) {
-            chrome.browserAction.setIcon({path: 'images/pm.png'});
-        } else {
-            chrome.browserAction.setIcon({path: 'images/icon16.png'});
-        }
-        chrome.browserAction.setBadgeText({text: text});
+        updateButton(result.data);
         lastErrorMessage = '';
     } else if (result.status == 400) {
         stopGetCount();
@@ -70,3 +61,26 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
         sendResponse({});
     }
 });
+
+function updateButton(counters) {
+    var text = '';
+
+    if (counters.all > 0) {
+        text = counters.all + '';
+    }
+    chrome.browserAction.setBadgeText({text: text});
+
+    if (counters.private > 0) {
+        chrome.browserAction.setIcon({path: 'images/pm.png'});
+    } else {
+        chrome.browserAction.setIcon({path: 'images/icon16.png'});
+    }
+
+    if ((counters.all + counters.private + counters.responded) > 0) {
+        var title = chrome.i18n.getMessage('unread_count',
+                            [counters.all, counters.private, counters.responded]);
+        chrome.browserAction.setTitle({title: title});
+    } else {
+        chrome.browserAction.setTitle({title: 'Plurk Plus'});
+    }
+}
