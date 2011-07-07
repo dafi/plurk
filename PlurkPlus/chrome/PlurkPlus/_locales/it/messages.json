@@ -83,7 +83,7 @@
     "message": "audio"
   },
   "unread_count": {
-    "message": "Tutti $ALL$, privati $PRIVATE$ e con risposta $RESPONDED$",
+    "message": "Nuovi $ALL$ privati $PRIVATE$ risposte $RESPONDED$",
     "placeholders": {
       "ALL": {
         "content": "$1",
